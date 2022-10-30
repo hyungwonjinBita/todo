@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import './App.css';
 import TodoList from './components/TodoList';
 import fetchTodoData from './api/fetchTodoList';
@@ -35,6 +36,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+  font-family: 'Source Sans Pro', sans-serif;
+  background-color: #E7E7EE;
 }
 ol, ul {
 	list-style: none;
@@ -54,9 +57,6 @@ table {
 *{
   box-sizing: border-box;
 }
-body {
-  font-family: 'Source Sans Pro', sans-serif;
-}
 a{
 	text-decoration: none;
 	color: inherit;
@@ -71,11 +71,17 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Wrapper>
       <GlobalStyle />
       <TodoList />
-    </>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  padding: 0px 20px;
+  max-width: 480px;
+  margin: 0 auto;
+`;
 
 export default App;
