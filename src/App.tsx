@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import { useSelector } from './store';
-import { shallowEqual } from 'react-redux';
 import TodoList from './components/TodoList';
+import fetchTodoData from './api/fetchTodoList';
+// import { useDispatch } from 'react-redux';
+import { useDispatch } from './store';
 
 function App() {
-  const person = useSelector((state) => state.todos, shallowEqual);
-  console.log(person);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTodoData());
+  }, []);
+
   return (
     <>
       <TodoList />

@@ -1,31 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { TodoState } from '../types';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import fetchTodoData from '../api/fetchTodoList';
+import { InitialState, TodoState } from '../types';
 
-const initialState: TodoState = [
-  {
-    userId: 1,
-    id: 1,
-    title: 'hello',
-    completed: false,
-  },
-  {
-    userId: 1,
-    id: 2,
-    title: 'bye',
-    completed: false,
-  },
-  {
-    userId: 1,
-    id: 3,
-    title: 'bye',
-    completed: true,
-  },
-];
+const initialState: InitialState = {
+  todoItem: [],
+};
 
 const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchTodoData.pending, (state) => {
+        state.todoItem = [];
+      })
+      .addCase(fetchTodoData.fulfilled, (state, action: PayloadAction<TodoState>) => {
+        console.log(action.payload);
+        state.todoItem = action.payload;
+      })
+      .addCase(fetchTodoData.rejected, (state) => {});
+  },
 });
-
+const selectSelf = (state: InitialState) => state;
+export const todoItemsSelector = createSelector(selectSelf, (state: Pick<InitialState, 'todoItem'>) => state.todoItem);
 export default todosSlice.reducer;

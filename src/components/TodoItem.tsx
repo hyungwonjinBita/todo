@@ -6,7 +6,6 @@ export type TodoProps = {
 };
 
 export default function TodoItem({ todo }: TodoProps) {
-  console.log(todo);
   return (
     <>
       <li>{todo.title}</li>

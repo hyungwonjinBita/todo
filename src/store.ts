@@ -3,9 +3,7 @@ import { createSelectorHook, useDispatch as useReduxDispatch } from 'react-redux
 import todosSlice from './modules/todos';
 
 const store = configureStore({
-  reducer: {
-    todos: todosSlice,
-  },
+  reducer: todosSlice,
 });
 export type RootState = ReturnType<typeof store.getState>;
 

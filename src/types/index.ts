@@ -6,3 +6,7 @@ export type Todo = {
 };
 
 export type TodoState = Todo[];
+
+export type InitialState = {
+  todoItem: Todo[];
+};
