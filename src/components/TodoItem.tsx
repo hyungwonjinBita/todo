@@ -1,21 +1,30 @@
 import { Todo } from '../types';
 import TodoButton from './TodoButton';
-import TodoInsert from './TodoInsert';
+import { TodoInput } from './TodoInput';
 import styled from 'styled-components';
+import { useState } from 'react';
+import { TodoCompleted } from './TodoCompleted';
 
 export type TodoProps = {
   todo: Todo;
 };
 
-export default function TodoItem({ todo }: TodoProps) {
+type TodoItemProps = {
+  id: number;
+  title: string;
+  completed: boolean;
+};
+
+export default function TodoItem({ id, title, completed }: TodoItemProps) {
+  const [value, setValue] = useState(title);
+  const handleValue = (string: string) => setValue(string);
+
   return (
     <WrapperItem>
-      <Item className={`TodoItem ${todo.completed ? 'done' : ''}`}>
-        <TodoInsert todo={todo} />
+      <Item>
+        {completed ? <TodoCompleted>{value}</TodoCompleted> : <TodoInput value={value} handleValue={handleValue} />}
       </Item>
-      <div>
-        <TodoButton todo={todo} />
-      </div>
+      <TodoButton id={id} completed={completed} />
     </WrapperItem>
   );
 }

@@ -13,7 +13,7 @@ export default function TodoList() {
     <Wrapper>
       <ul>
         {todos.map((todo) => (
-          <TodoItem todo={todo} key={todo.id} />
+          <TodoItem id={todo.id} title={todo.title} completed={todo.completed} key={todo.id} />
         ))}
       </ul>
       <Button onClick={onAddTodo}>タスクを追加</Button>
