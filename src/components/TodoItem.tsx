@@ -1,7 +1,6 @@
 import { Todo } from '../types';
 import TodoButton from './TodoButton';
 import TodoInsert from './TodoInsert';
-import './TodoItem.css';
 import styled from 'styled-components';
 
 export type TodoProps = {

@@ -10,9 +10,17 @@ const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    toggleTodo: ({ todoItem }, { payload }: PayloadAction<number>) => {
-      //   return state.todoItem.map((todo) => (todo.id === action.payload ? { ...todo, completed: !todo.completed } : todo));
-      todoItem.map((todo) => (todo.id === payload ? { ...todo, completed: !todo.completed } : todo));
+    toggleTodo: (state, { payload }: PayloadAction<number>) => {
+      state.todoItem.map((todo) => (todo.id === payload ? (todo.completed = !todo.completed) : todo));
+    },
+    addTodo: (state, _) => {
+      const nextId = Math.max(...state.todoItem.map((todo) => todo.id)) + 1;
+      state.todoItem.push({
+        userId: 1,
+        id: nextId,
+        title: 'New タスク',
+        completed: false,
+      });
     },
   },
   extraReducers: (builder) => {
@@ -29,5 +37,5 @@ const todosSlice = createSlice({
 const selectSelf = (state: InitialState) => state;
 export const todoItemsSelector = createSelector(selectSelf, (state: Pick<InitialState, 'todoItem'>) => state.todoItem);
 
-export const { toggleTodo } = todosSlice.actions;
+export const { toggleTodo, addTodo } = todosSlice.actions;
 export default todosSlice.reducer;

@@ -9,7 +9,12 @@ export default function TodoInsert({ todo }: TodoProps) {
     setValue(e.target.value);
   };
 
-  return <Input value={value} onChange={onChange} />;
+  // 이런 if분기 올바른가?
+  if (todo.completed) {
+    return <FinishTodo>{value}</FinishTodo>;
+  } else {
+    return <Input value={value} onChange={onChange} />;
+  }
 }
 
 const Input = styled.input`
@@ -19,4 +24,10 @@ const Input = styled.input`
   padding: 5px 0;
   border: none;
   border-bottom: 1px solid #989898;
+  color: black;
+`;
+
+const FinishTodo = styled.span`
+  color: black;
+  text-decoration: line-through;
 `;

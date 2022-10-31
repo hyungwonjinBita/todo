@@ -5,7 +5,6 @@ import { TodoProps } from './TodoItem';
 
 export default function TodoButton({ todo }: TodoProps) {
   const onToggle = useToggle(todo.id);
-  console.log(todo.completed);
 
   if (todo.completed) {
     return <BackButton onClick={onToggle}>戻す</BackButton>;
@@ -14,6 +13,7 @@ export default function TodoButton({ todo }: TodoProps) {
   }
 }
 
+// 스타일컴포넌트 요소가 겹치고 있음, 리팩토링 방법?
 const FinishButton = styled.button`
   all: unset;
   background-color: #303f9f;
@@ -24,6 +24,7 @@ const FinishButton = styled.button`
   box-sizing: border-box;
   line-height: 1.75;
   border-radius: 4px;
+  cursor: pointer;
 `;
 const BackButton = styled.button`
   all: unset;
@@ -35,4 +36,5 @@ const BackButton = styled.button`
   box-sizing: border-box;
   line-height: 1.75;
   border-radius: 4px;
+  cursor: pointer;
 `;
